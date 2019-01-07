@@ -1,0 +1,25 @@
+{
+  "name": "ipgeoservice",
+  "version": "1.0.0",
+  "description": "Customer IP lookup service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kem18/ipgeoservice.git"
+  },
+  "author": "Keith Meyers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kem18/ipgeoservice/issues"
+  },
+  "homepage": "https://github.com/kem18/ipgeoservice#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "maxmind": "^2.11.2",
+    "morgan": "^1.9.1",
+    "rotating-file-stream": "^1.3.10"
+  }
+}

@@ -234,3 +234,7 @@
 ::1 - - [07/Jan/2019:22:04:26 +0000] "GET /api/v1/ipgeo/76.209.101.123 HTTP/1.1" 200 699 "-" "PostmanRuntime/7.4.0"
 ::1 - - [07/Jan/2019:22:04:36 +0000] "GET /api/v1/ipgeo/restrictions/76.209.101.123?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20%22HC%22] HTTP/1.1" 200 122 "-" "PostmanRuntime/7.4.0"
 ::1 - - [07/Jan/2019:22:05:28 +0000] "GET /api/v1/ipgeo/restrictions/76.209.101.123?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20%22HC%22] HTTP/1.1" 200 122 "-" "PostmanRuntime/7.4.0"
+::1 - - [07/Jan/2019:22:25:17 +0000] "GET /api/v1/ipgeo/restrictions/76.209.101.123?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20%22HC%22] HTTP/1.1" 200 122 "-" "PostmanRuntime/7.4.0"
+::1 - - [07/Jan/2019:22:28:14 +0000] "GET /api/v1/ipgeo/restrictions/76.209.101.123?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20%22HC%22] HTTP/1.1" 200 122 "-" "PostmanRuntime/7.4.0"
+::1 - - [07/Jan/2019:22:32:52 +0000] "GET /api/v1/ipgeo/restrictions/27.120.192.0?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20%22HC%22] HTTP/1.1" 403 115 "-" "PostmanRuntime/7.4.0"
+::1 - - [07/Jan/2019:22:33:56 +0000] "GET /api/v1/ipgeo/restrictions/27.120.192.0?whitelist=[%22US%22,%22DE%22,%20%22EG%22,%20%22FR%22,%20C%22] HTTP/1.1" 400 59 "-" "PostmanRuntime/7.4.0"

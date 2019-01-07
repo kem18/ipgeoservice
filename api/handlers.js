@@ -13,12 +13,21 @@ exports.restrictionsHandler = function (req, res) {
     if (whitelist !== undefined && whitelist.length > 0) {
         //Validate IP
         if (geolite.validateIp(req.params.ip)) {
-        
-            //Get ISO 3166 country code
-            let isoCode = geolite.getCountryISOCode(req.params.ip);
 
-            //Determine if isoCode of customer exists in whitelist
-            processCode(isoCode, whitelist, res, req);
+            try {
+                //Get ISO 3166 country code
+                let isoCode = geolite.getCountryISOCode(req.params.ip);
+
+                //Determine if isoCode of customer exists in whitelist
+                processCode(isoCode, whitelist, res, req);
+
+            } catch (error) {
+                res.statusCode = 500;
+                res.json({
+                    statusCode: res.statusCode,
+                    error: `${error}`
+                });
+            }
         }
         else {
             res.statusCode = 400;
@@ -42,15 +51,26 @@ exports.locationDetailsHandler = function (req, res) {
 
     //Validate IP
     if (geolite.validateIp(req.params.ip)) {
-        let location = geolite.getCountryGeoData(req.params.ip);
+        try {
 
-        if (!location) {
-            res.statusCode = 400;
-            res.json({ error: 'BAD REQUEST: Invalid IP Address' });
-        }
-        else {
-            // res.send(artist);
-            res.json(location);
+            let location = geolite.getCountryGeoData(req.params.ip);
+
+            if (location !== undefined) {
+                res.json(location);
+            } else {
+                res.statusCode = 400;
+                res.json({
+                    statusCode: res.statusCode,
+                    error: 'BAD REQUEST: Invalid IP Address'
+                });
+            }
+            
+        } catch (error) {
+            res.statusCode = 500;
+            res.json({
+                statusCode: res.statusCode,
+                error: `${error}`
+            });
         }
     } else {
         res.statusCode = 400;

@@ -12,7 +12,7 @@ $ git clone https://github.com/kem18/ipgeoservice.git ipgeoservice
 # go into project directory
 $ cd ipgeoservice
 
-# install app's dependencies
+# install projects dependencies
 $ npm install
 ```
 

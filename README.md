@@ -2,11 +2,20 @@
 
 Get country restrictions from IP address using [MaxMind](https://www.maxmind.com) GeoLite2 binary database.
 
+
 ## Installation
 
-```bash
-$ npm install @kem18/ipgeoservice
+``` bash
+# clone the repo
+$ git clone https://github.com/kem18/ipgeoservice.git ipgeoservice
+
+# go into project directory
+$ cd ipgeoservice
+
+# install app's dependencies
+$ npm install
 ```
+
 
 ## Usage
 GET Customer Country Location Restrictions By IP

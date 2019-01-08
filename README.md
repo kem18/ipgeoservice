@@ -22,6 +22,12 @@ $ npm install
 $ npm start
 ```
 
+### Docker Support
+``` bash
+$ docker build -t <your docker username>/ipgeoservice .
+$ docker run -p 3000:3000 -d <your docker username>/ipgeoservice
+```
+
 ### Node Server Environment Settings
 These may be exported in environment prior to starting server
 

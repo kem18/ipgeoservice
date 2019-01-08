@@ -19,7 +19,7 @@ $ npm install
 ### Node Server Startup
 
 ``` bash
-$ node server.js
+$ npm start
 ```
 
 ### Node Server Environment Settings
@@ -54,7 +54,7 @@ Valid IP Address:
     "isoCode": "US",
     "ip": "76.209.101.123",
     "statusCode": 200,
-    "message": "ALLOWED: IP address is within the the listed countries"
+    "message": "ALLOWED: IP address is within the listed countries"
 }
 
 Forbidden IP Address:

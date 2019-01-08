@@ -73,5 +73,19 @@ Malformed Request:
 
 
 ```
+### Future Ehancements
+
+* Dynamic Mapping Data Sync
+
+1) "Update" Cron script:
+    - Curl latest GeoLite2-Country.mmdb file from https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz
+    - Unarchive and store mmdb file in public repo or AWS S3 bucket
+    - 
+
+2) "Retrieve" Cron script
+    - Backup existing local GeoLite-Country.mmdb file
+    - rsync remote GeoLite2-Country.mmdb file from public repo or AWS S3 bucket
+
+
 
 

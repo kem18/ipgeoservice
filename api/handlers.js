@@ -60,36 +60,3 @@ exports.locationDetailsHandler = function (req, res) {
         utils.sendErrorResponse(res, constants.HTTP_BAD_REQUEST, 'BAD REQUEST: Invalid IP Address');
     }
 }
-
-// =============================================================================
-// Supporting Functions
-// =============================================================================
-
-// function processCode(isoCode, whitelist, res, req) {
-
-//     //Sanitize whitelist - uppercase to match geolite data
-//     let sanitizedList = utils.upperCaseList(whitelist);
-
-//     if (isoCode != undefined && sanitizedList.indexOf(isoCode) >= 0) {
-//         //Valid Country
-//         res.statusCode = constants.HTTP_OK;
-
-//         res.json({
-//             isoCode,
-//             ip: `${req.params.ip}`,
-//             statusCode: res.statusCode,
-//             message: `ALLOWED: IP address is within the the listed countries`
-//         });
-//     }
-//     else {
-//         //Forbidden Country
-//         res.statusCode = constants.HTTP_FORBIDDEN;
-
-//         res.json({
-//             isoCode,
-//             ip: `${req.params.ip}`,
-//             statusCode: res.statusCode,
-//             message: `FORBIDDEN: IP address not from an allowed country`
-//         });
-//     }
-// }

@@ -31,12 +31,13 @@ These may be exported in environment prior to starting server
 
 
 ### Endpoints
-GET Geo Location Restrictions By IP - /api/v1/ipgeo/restrictions/{ip}?whitelist={country ISO Codes...}`
+GET Geo Location Restrictions By IP - /api/v1/ipgeo/restrictions/{ip}?whitelist={"Country ISO Code", "Country ISO Code"...}
 
 Example URL : http://localhost:3000/api/v1/ipgeo/restrictions/76.209.101.123?whitelist=["US","DE"]
 
 
 GET GEO Location Details By IP - /api/v1/ipgeo/{ip}
+
 Example URL : http://localhost:3000/api/v1/ipgeo/76.209.101.123
 
 

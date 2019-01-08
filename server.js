@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream')
 
-const logDirectory = process.env.LOGPATH ||  path.join(__dirname, 'log');
+const logDirectory = process.env.LOGPATH || path.join(__dirname, 'log');
 
 //Generic API versioning
 const API_VERSION = 1;

@@ -1,6 +1,7 @@
 'use strict';
 const geolite = require('../lib/geolite');
 const utils = require('../lib/utils');
+const constants = require('../config/constants');
 
 // =============================================================================
 // Route Handler Functions
@@ -8,41 +9,33 @@ const utils = require('../lib/utils');
 
 //Geo Location Country Restrictions Handler 
 exports.restrictionsHandler = function (req, res) {
-    let whitelist = utils.getWhitelistFromRequest(req);
 
-    if (whitelist !== undefined && whitelist.length > 0) {
-        //Validate IP
-        if (geolite.validateIp(req.params.ip)) {
+    try {
+        //Validat whitelist
+        let whitelist = utils.getWhitelistFromRequest(req);
 
-            try {
-                //Get ISO 3166 country code
-                let isoCode = geolite.getCountryISOCode(req.params.ip);
+        if (whitelist !== undefined && whitelist.length > 0) {
 
-                //Determine if isoCode of customer exists in whitelist
-                processCode(isoCode, whitelist, res, req);
+            //Validate IP
+            if (geolite.validateIp(req.params.ip)) {
 
-            } catch (error) {
-                res.statusCode = 500;
-                res.json({
-                    statusCode: res.statusCode,
-                    error: `${error}`
-                });
+                try {
+                    //Get ISO 3166 country code
+                    let isoCode = geolite.getCountryISOCode(req.params.ip);
+
+                    //Determine if isoCode of customer exists in whitelist
+                    utils.processCode(isoCode, whitelist, res, req);
+
+                } catch (error) {
+                    utils.sendErrorResponse(res, constants.HTTP_INTERNAL_SERVER_ERROR, error);
+                }
+            }
+            else {
+                utils.sendErrorResponse(res, constants.HTTP_BAD_REQUEST, 'BAD REQUEST: Invalid IP Address');
             }
         }
-        else {
-            res.statusCode = 400;
-            res.json({
-                statusCode: res.statusCode,
-                error: 'BAD REQUEST: Invalid IP Address'
-            });
-        }
-    }
-    else {
-        res.statusCode = 400;
-        res.json({
-            statusCode: res.statusCode,
-            error: 'BAD REQUEST: Invalid whitelist'
-        });
+    } catch (error) {
+        utils.sendErrorResponse(res, constants.HTTP_BAD_REQUEST, 'BAD REQUEST: Invalid whitelist');
     }
 }
 
@@ -52,29 +45,19 @@ exports.locationDetailsHandler = function (req, res) {
     //Validate IP
     if (geolite.validateIp(req.params.ip)) {
         try {
-
             let location = geolite.getCountryGeoData(req.params.ip);
 
             if (location !== undefined) {
                 res.json(location);
             } else {
-                res.statusCode = 400;
-                res.json({
-                    statusCode: res.statusCode,
-                    error: 'BAD REQUEST: Invalid IP Address'
-                });
+                utils.sendErrorResponse(res, constants.HTTP_BAD_REQUEST, 'BAD REQUEST: Invalid IP Address');
             }
-            
+
         } catch (error) {
-            res.statusCode = 500;
-            res.json({
-                statusCode: res.statusCode,
-                error: `${error}`
-            });
+            utils.sendErrorResponse(res, constants.HTTP_INTERNAL_SERVER_ERROR, error);
         }
     } else {
-        res.statusCode = 400;
-        res.json({ error: 'BAD REQUEST: Invalid IP Address' });
+        utils.sendErrorResponse(res, constants.HTTP_BAD_REQUEST, 'BAD REQUEST: Invalid IP Address');
     }
 }
 
@@ -82,25 +65,31 @@ exports.locationDetailsHandler = function (req, res) {
 // Supporting Functions
 // =============================================================================
 
-function processCode(isoCode, whitelist, res, req) {
-    if (isoCode != undefined && whitelist.indexOf(isoCode) >= 0) {
-        //Valid Country
-        res.statusCode = 200;
-        res.json({
-            isoCode,
-            ip: `${req.params.ip}`,
-            statusCode: res.statusCode,
-            message: `ALLOWED: IP address is within the the listed countries`
-        });
-    }
-    else {
-        //Forbidden Country
-        res.statusCode = 403;
-        res.json({
-            isoCode,
-            ip: `${req.params.ip}`,
-            statusCode: res.statusCode,
-            message: `FORBIDDEN: IP address not from an allowed country`
-        });
-    }
-}
+// function processCode(isoCode, whitelist, res, req) {
+
+//     //Sanitize whitelist - uppercase to match geolite data
+//     let sanitizedList = utils.upperCaseList(whitelist);
+
+//     if (isoCode != undefined && sanitizedList.indexOf(isoCode) >= 0) {
+//         //Valid Country
+//         res.statusCode = constants.HTTP_OK;
+
+//         res.json({
+//             isoCode,
+//             ip: `${req.params.ip}`,
+//             statusCode: res.statusCode,
+//             message: `ALLOWED: IP address is within the the listed countries`
+//         });
+//     }
+//     else {
+//         //Forbidden Country
+//         res.statusCode = constants.HTTP_FORBIDDEN;
+
+//         res.json({
+//             isoCode,
+//             ip: `${req.params.ip}`,
+//             statusCode: res.statusCode,
+//             message: `FORBIDDEN: IP address not from an allowed country`
+//         });
+//     }
+// }

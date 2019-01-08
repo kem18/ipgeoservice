@@ -9,7 +9,7 @@ const handlers = require('./handlers');
 // MIDDLEWARE - all requests
 // ----------------------------------------------------------------------------------------------------------------------
 router.use(function (req, res, next) {
-    // TODO: DO ALL LOGGING HERE
+    // Pre-processing middleware placeholder - currently not being used
     console.log('Received Request...');
     next();
 });
@@ -38,7 +38,7 @@ router.route('/ipgeo/restrictions/:ip')
 
 
 // ----------------------------------------------------------------------------------------------------------------------
-// GET GEO Location Details By IP
+// GET Geo Location Details By IP
 //
 // Request Params:
 //  ip - Valid IPv4 or IPv6 address
